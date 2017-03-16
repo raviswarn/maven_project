@@ -1,17 +1,8 @@
 #!/bin/bash
 
 # Setup Docker environment. If '/certs' is mounted then use SSL
-host=$(http://54.175.42.138:8080 | grep -Eo 'via \S+' | awk '{print $2}');
-if [ -f /certs/key.pem ]; then
-  # If certs are mounted, use SSL ...
-  export DOCKER_CERT_PATH=/certs
-  export DOCKER_TLS_VERIFY=0
-  export DOCKER_HOST=tcp://${host}:4243
-else
-  # ... otherwise use plain http
-  export DOCKER_TLS_VERIFY=0
-  export DOCKER_HOST=tcp://${host}:4243
-fi
+host=$http://54.175.42.138:8080
+
 
 # Clone repo
 repo=$1
